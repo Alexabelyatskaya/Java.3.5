@@ -3,12 +3,14 @@ package ru.netology.test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.domain.Book;
+import ru.netology.domain.NotFoundException;
 import ru.netology.domain.Product;
 import ru.netology.domain.Smartphone;
 import ru.netology.manager.ProductManager;
 import ru.netology.repo.ProductRepository;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ProductManagerTest {
     ProductRepository repository = new ProductRepository();
@@ -50,5 +52,19 @@ class ProductManagerTest {
     @Test
     public void shouldSearchNone() {
         assertArrayEquals(manager.searchBy("123"), new Product[]{});
+    }
+
+    @Test
+    public void shouldRemoveByID() {
+        repository.removeById(3);
+
+        assertArrayEquals(repository.findAll(), new Product[]{one, two, four});
+    }
+
+    @Test
+    public void shouldRemoveByIdError() {
+        assertThrows(NotFoundException.class, () -> {
+            repository.removeById(10);
+        });
     }
 }

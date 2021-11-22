@@ -1,6 +1,5 @@
 package ru.netology.manager;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.netology.domain.Book;
@@ -9,11 +8,9 @@ import ru.netology.domain.Smartphone;
 import ru.netology.repo.ProductRepository;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
 public class ProductManager {
     private ProductRepository repository;
-    private Product[] items = new Product[0];
 
     public ProductManager(ProductRepository repository) {
         this.repository = repository;
